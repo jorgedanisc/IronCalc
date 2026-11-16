@@ -1,9 +1,9 @@
-# xlsx-to-pdf
+# @jorgedanisc/xlsx-to-pdf
 
 > Fast, pure WebAssembly Excel (`.xlsx`) to PDF converter for **Node.js**, **Browsers**, and **Edge runtimes**. Built on [IronCalc](https://github.com/ironcalc/IronCalc).
 
-[![npm version](https://img.shields.io/npm/v/xlsx-to-pdf.svg)](https://www.npmjs.com/package/xlsx-to-pdf)
-[![license](https://img.shields.io/npm/l/xlsx-to-pdf.svg)](https://github.com/ironcalc/IronCalc)
+[![npm version](https://img.shields.io/npm/v/@jorgedanisc/xlsx-to-pdf.svg)](https://www.npmjs.com/package/@jorgedanisc/xlsx-to-pdf)
+[![license](https://img.shields.io/npm/l/@jorgedanisc/xlsx-to-pdf.svg)](https://github.com/ironcalc/IronCalc)
 
 No LibreOffice, no Puppeteer, no headless Chrome, no external native binaries, no cloud services. Just fast, deterministic WebAssembly.
 
@@ -30,11 +30,11 @@ No LibreOffice, no Puppeteer, no headless Chrome, no external native binaries, n
 ## Installation
 
 ```bash
-npm install xlsx-to-pdf
+npm install @jorgedanisc/xlsx-to-pdf
 # or
-pnpm add xlsx-to-pdf
+pnpm add @jorgedanisc/xlsx-to-pdf
 # or
-yarn add xlsx-to-pdf
+yarn add @jorgedanisc/xlsx-to-pdf
 ```
 
 ---
@@ -44,7 +44,7 @@ yarn add xlsx-to-pdf
 ### Node.js
 
 ```typescript
-import { convertXlsxToPdf } from 'xlsx-to-pdf';
+import { convertXlsxToPdf } from '@jorgedanisc/xlsx-to-pdf';
 import fs from 'node:fs/promises';
 
 // Read your spreadsheet
@@ -65,7 +65,7 @@ await fs.writeFile('budget.pdf', pdfBytes);
 Or using the file-to-file convenience helper:
 
 ```typescript
-import { convertXlsxFileToPdf } from 'xlsx-to-pdf';
+import { convertXlsxFileToPdf } from '@jorgedanisc/xlsx-to-pdf';
 
 await convertXlsxFileToPdf('input.xlsx', 'output.pdf', {
   paperSize: 'Letter',
@@ -76,7 +76,7 @@ await convertXlsxFileToPdf('input.xlsx', 'output.pdf', {
 Synchronous conversion is also supported in Node.js:
 
 ```typescript
-import { convertXlsxToPdfSync } from 'xlsx-to-pdf';
+import { convertXlsxToPdfSync } from '@jorgedanisc/xlsx-to-pdf';
 import fs from 'node:fs';
 
 const xlsxBytes = fs.readFileSync('input.xlsx');
@@ -88,10 +88,10 @@ fs.writeFileSync('output.pdf', pdfBytes);
 
 ### Browser (Vite / Webpack / Next.js / Vanilla)
 
-In the browser, import from `'xlsx-to-pdf'` (or `'xlsx-to-pdf/browser'`):
+In the browser, import from `'@jorgedanisc/xlsx-to-pdf'` (or `'@jorgedanisc/xlsx-to-pdf/browser'`):
 
 ```typescript
-import { convertXlsxToPdf, init } from 'xlsx-to-pdf';
+import { convertXlsxToPdf, init } from '@jorgedanisc/xlsx-to-pdf';
 
 // Optional: customize the WASM location or let it load automatically
 await init(); // or await init('/assets/xlsx_to_pdf_wasm_bg.wasm')
@@ -124,7 +124,7 @@ async function handleFile(file: File) {
 Before exporting, you can inspect the worksheets and fonts used in the spreadsheet:
 
 ```typescript
-import { getWorkbookInfo } from 'xlsx-to-pdf';
+import { getWorkbookInfo } from '@jorgedanisc/xlsx-to-pdf';
 
 const info = await getWorkbookInfo(xlsxBytes);
 
@@ -147,7 +147,7 @@ console.log('Fonts used:', info.fonts);
 If you want to perform multiple exports of the same spreadsheet with different settings without re-parsing:
 
 ```typescript
-import { XlsxDocument } from 'xlsx-to-pdf';
+import { XlsxDocument } from '@jorgedanisc/xlsx-to-pdf';
 
 const doc = await XlsxDocument.load(xlsxBytes);
 
@@ -186,7 +186,7 @@ doc.dispose();
 By default, the engine uses built-in standard fonts. You can embed custom TrueType (`.ttf`) or OpenType (`.otf`) fonts to preserve branding or special typography:
 
 ```typescript
-import { convertXlsxToPdf } from 'xlsx-to-pdf';
+import { convertXlsxToPdf } from '@jorgedanisc/xlsx-to-pdf';
 import fs from 'node:fs/promises';
 
 const interFont = await fs.readFile('Inter-Regular.ttf');
