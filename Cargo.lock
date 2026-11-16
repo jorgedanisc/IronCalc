@@ -1861,6 +1861,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "xlsx-to-pdf-wasm"
+version = "0.1.0"
+dependencies = [
+ "ironcalc",
+ "ironcalc_base",
+ "ironcalc_pdf",
+ "serde",
+ "serde-wasm-bindgen",
+ "serde_json",
+ "wasm-bindgen",
+ "wasm-bindgen-test",
+]
+
+[[package]]
 name = "zip"
 version = "9.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"

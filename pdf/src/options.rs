@@ -984,6 +984,7 @@ pub enum BookmarkPolicy {
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct CustomFontData {
     /// Family name or PostScript name matching spreadsheet font (e.g. "Inter", "Roboto", "Calibri").
+    #[cfg_attr(feature = "serde", serde(alias = "family"))]
     pub name: String,
     /// Raw TrueType (.ttf) or OpenType (.otf) font file bytes.
     #[cfg_attr(
@@ -1046,6 +1047,18 @@ where
         {
             decode_base64(v).map_err(de::Error::custom)
         }
+        fn visit_bytes<E>(self, v: &[u8]) -> Result<Self::Value, E>
+        where
+            E: de::Error,
+        {
+            Ok(v.to_vec())
+        }
+        fn visit_byte_buf<E>(self, v: Vec<u8>) -> Result<Self::Value, E>
+        where
+            E: de::Error,
+        {
+            Ok(v)
+        }
         fn visit_seq<A>(self, mut seq: A) -> Result<Self::Value, A::Error>
         where
             A: de::SeqAccess<'de>,
@@ -1067,20 +1080,20 @@ pub struct PdfExportOptionsPayload {
     #[cfg_attr(feature = "serde", serde(default))]
     pub scope: Option<String>,
     /// Selected range string if scope is "SelectedCells" (e.g. "A1:D10")
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "selectionRange"))]
     pub selection_range: Option<String>,
     /// Selected sheet index (0-based)
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "sheetIndex"))]
     pub sheet_index: Option<u32>,
 
     /// Paper size: "Letter", "Tabloid", "Legal", "Statement", "Executive", "Folio", "A3", "A4", "A5", "B4", "B5", "Custom"
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "paperSize"))]
     pub paper_size: Option<String>,
     /// Custom paper width in points (if paper_size is "Custom")
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "customWidthPt", alias = "customWidth"))]
     pub custom_width_pt: Option<f32>,
     /// Custom paper height in points (if paper_size is "Custom")
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "customHeightPt", alias = "customHeight"))]
     pub custom_height_pt: Option<f32>,
 
     /// Orientation: "Landscape" or "Portrait"
@@ -1091,57 +1104,57 @@ pub struct PdfExportOptionsPayload {
     #[cfg_attr(feature = "serde", serde(default))]
     pub scale: Option<String>,
     /// Custom scale percentage (e.g. 100)
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "scalePercentage"))]
     pub scale_percentage: Option<f32>,
 
     /// Margins: "Normal", "Narrow", "Wide", "Custom"
     #[cfg_attr(feature = "serde", serde(default))]
     pub margins: Option<String>,
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "marginTopPt", alias = "marginTop"))]
     pub margin_top_pt: Option<f32>,
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "marginRightPt", alias = "marginRight"))]
     pub margin_right_pt: Option<f32>,
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "marginBottomPt", alias = "marginBottom"))]
     pub margin_bottom_pt: Option<f32>,
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "marginLeftPt", alias = "marginLeft"))]
     pub margin_left_pt: Option<f32>,
 
     /// Gridlines override
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "showGridLines", alias = "gridlines", alias = "gridLines"))]
     pub show_grid_lines: Option<bool>,
     /// Row & column headings override
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "showHeadings", alias = "headings"))]
     pub show_headings: Option<bool>,
     /// Page order: "DownThenOver" or "OverThenDown"
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "pageOrder"))]
     pub page_order: Option<String>,
     /// Horizontal alignment: "Left", "Center", "Right"
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "horizontalAlignment"))]
     pub horizontal_alignment: Option<String>,
     /// Vertical alignment: "Top", "Middle", "Bottom"
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "verticalAlignment"))]
     pub vertical_alignment: Option<String>,
 
     /// Header / Footer options
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "pageNumbers"))]
     pub page_numbers: Option<bool>,
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "workbookTitle"))]
     pub workbook_title: Option<bool>,
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "sheetName"))]
     pub sheet_name: Option<bool>,
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "currentDate"))]
     pub current_date: Option<bool>,
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "currentTime"))]
     pub current_time: Option<bool>,
 
     /// Frozen rows / columns
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "repeatFrozenRows"))]
     pub repeat_frozen_rows: Option<bool>,
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "repeatFrozenColumns"))]
     pub repeat_frozen_columns: Option<bool>,
 
     /// Custom font files to embed
-    #[cfg_attr(feature = "serde", serde(default))]
+    #[cfg_attr(feature = "serde", serde(default, alias = "customFonts", alias = "fonts"))]
     pub custom_fonts: Option<Vec<CustomFontData>>,
 }
 

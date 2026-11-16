@@ -38,12 +38,16 @@ test-js:
 test-nodejs:
 	cd bindings/nodejs/ && pnpm install && pnpm run build && pnpm run test
 
+.PHONY: test-xlsx-to-pdf
+test-xlsx-to-pdf:
+	cd packages/xlsx-to-pdf && pnpm install && pnpm run build && pnpm test
+
 .PHONY: test-python
 test-python:
 	cd bindings/python && ./run_tests.sh && ./run_examples.sh
 
 .PHONY: tests
-tests: lint test-rust test-js test-python test-nodejs test-language-bin
+tests: lint test-rust test-js test-python test-nodejs test-xlsx-to-pdf test-language-bin
 
 .PHONY: remove-artifacts
 remove-artifacts:
