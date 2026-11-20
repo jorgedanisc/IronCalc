@@ -3,6 +3,10 @@
 //! A Rust-native spreadsheet-to-PDF export library for IronCalc.
 //! this crate provides an intermediate print layout engine and vector PDF generation pipeline
 
+// NOTE: this engine is vendored into the `xlsx-to-pdf` crate
+// (`packages/xlsx-to-pdf/wasm/src/pdf`) so that crate can be published on its
+// own. Run `make sync-pdf` after changing it.
+
 pub mod error;
 pub mod layout;
 pub mod options;

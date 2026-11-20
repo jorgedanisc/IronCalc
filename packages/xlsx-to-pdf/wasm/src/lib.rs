@@ -1,7 +1,9 @@
+pub mod pdf;
+
 use ironcalc::base::types::SheetState;
 use ironcalc::base::Model;
 use ironcalc::import::load_from_xlsx_bytes;
-use ironcalc_pdf::{export_to_pdf, PdfExportOptions, PdfExportOptionsPayload};
+use pdf::{export_to_pdf, PdfExportOptions, PdfExportOptionsPayload};
 use serde::Serialize;
 use wasm_bindgen::prelude::*;
 
@@ -115,7 +117,8 @@ impl XlsxDocument {
     #[wasm_bindgen(js_name = "toPdf")]
     pub fn to_pdf(&self, options: JsValue) -> Result<Vec<u8>, JsError> {
         let opts = parse_options(options)?;
-        export_to_pdf(&self.model, &opts).map_err(|e| to_js_error(format!("PDF export failed: {e}")))
+        export_to_pdf(&self.model, &opts)
+            .map_err(|e| to_js_error(format!("PDF export failed: {e}")))
     }
 
     #[wasm_bindgen(js_name = "getInfo")]

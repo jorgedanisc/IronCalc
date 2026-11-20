@@ -1090,10 +1090,16 @@ pub struct PdfExportOptionsPayload {
     #[cfg_attr(feature = "serde", serde(default, alias = "paperSize"))]
     pub paper_size: Option<String>,
     /// Custom paper width in points (if paper_size is "Custom")
-    #[cfg_attr(feature = "serde", serde(default, alias = "customWidthPt", alias = "customWidth"))]
+    #[cfg_attr(
+        feature = "serde",
+        serde(default, alias = "customWidthPt", alias = "customWidth")
+    )]
     pub custom_width_pt: Option<f32>,
     /// Custom paper height in points (if paper_size is "Custom")
-    #[cfg_attr(feature = "serde", serde(default, alias = "customHeightPt", alias = "customHeight"))]
+    #[cfg_attr(
+        feature = "serde",
+        serde(default, alias = "customHeightPt", alias = "customHeight")
+    )]
     pub custom_height_pt: Option<f32>,
 
     /// Orientation: "Landscape" or "Portrait"
@@ -1110,20 +1116,43 @@ pub struct PdfExportOptionsPayload {
     /// Margins: "Normal", "Narrow", "Wide", "Custom"
     #[cfg_attr(feature = "serde", serde(default))]
     pub margins: Option<String>,
-    #[cfg_attr(feature = "serde", serde(default, alias = "marginTopPt", alias = "marginTop"))]
+    #[cfg_attr(
+        feature = "serde",
+        serde(default, alias = "marginTopPt", alias = "marginTop")
+    )]
     pub margin_top_pt: Option<f32>,
-    #[cfg_attr(feature = "serde", serde(default, alias = "marginRightPt", alias = "marginRight"))]
+    #[cfg_attr(
+        feature = "serde",
+        serde(default, alias = "marginRightPt", alias = "marginRight")
+    )]
     pub margin_right_pt: Option<f32>,
-    #[cfg_attr(feature = "serde", serde(default, alias = "marginBottomPt", alias = "marginBottom"))]
+    #[cfg_attr(
+        feature = "serde",
+        serde(default, alias = "marginBottomPt", alias = "marginBottom")
+    )]
     pub margin_bottom_pt: Option<f32>,
-    #[cfg_attr(feature = "serde", serde(default, alias = "marginLeftPt", alias = "marginLeft"))]
+    #[cfg_attr(
+        feature = "serde",
+        serde(default, alias = "marginLeftPt", alias = "marginLeft")
+    )]
     pub margin_left_pt: Option<f32>,
 
     /// Gridlines override
-    #[cfg_attr(feature = "serde", serde(default, alias = "showGridLines", alias = "gridlines", alias = "gridLines"))]
+    #[cfg_attr(
+        feature = "serde",
+        serde(
+            default,
+            alias = "showGridLines",
+            alias = "gridlines",
+            alias = "gridLines"
+        )
+    )]
     pub show_grid_lines: Option<bool>,
     /// Row & column headings override
-    #[cfg_attr(feature = "serde", serde(default, alias = "showHeadings", alias = "headings"))]
+    #[cfg_attr(
+        feature = "serde",
+        serde(default, alias = "showHeadings", alias = "headings")
+    )]
     pub show_headings: Option<bool>,
     /// Page order: "DownThenOver" or "OverThenDown"
     #[cfg_attr(feature = "serde", serde(default, alias = "pageOrder"))]
@@ -1154,7 +1183,10 @@ pub struct PdfExportOptionsPayload {
     pub repeat_frozen_columns: Option<bool>,
 
     /// Custom font files to embed
-    #[cfg_attr(feature = "serde", serde(default, alias = "customFonts", alias = "fonts"))]
+    #[cfg_attr(
+        feature = "serde",
+        serde(default, alias = "customFonts", alias = "fonts")
+    )]
     pub custom_fonts: Option<Vec<CustomFontData>>,
 }
 

@@ -10,8 +10,8 @@ export default defineConfig({
   sourcemap: true,
   shims: true,
   onSuccess: async () => {
-    const srcWasm = path.resolve('pkg-wasm/xlsx_to_pdf_wasm_bg.wasm');
-    const destWasm = path.resolve('dist/xlsx_to_pdf_wasm_bg.wasm');
+    const srcWasm = path.resolve('pkg-wasm/xlsx_to_pdf_bg.wasm');
+    const destWasm = path.resolve('dist/xlsx_to_pdf_bg.wasm');
     if (fs.existsSync(srcWasm)) {
       fs.copyFileSync(srcWasm, destWasm);
       console.log('Copied wasm binary to dist/');

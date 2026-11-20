@@ -1,7 +1,7 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import initWasm, { initSync } from '../pkg-wasm/xlsx_to_pdf_wasm.js';
+import initWasm, { initSync } from '../pkg-wasm/xlsx_to_pdf.js';
 import type { WasmInitInput } from './types.js';
 
 let initialized = false;
@@ -10,9 +10,9 @@ let initPromise: Promise<void> | null = null;
 function getWasmBytes(): Buffer {
   let wasmPath: string;
   try {
-    wasmPath = fileURLToPath(new URL('./xlsx_to_pdf_wasm_bg.wasm', import.meta.url));
+    wasmPath = fileURLToPath(new URL('./xlsx_to_pdf_bg.wasm', import.meta.url));
   } catch {
-    wasmPath = path.resolve(__dirname, 'xlsx_to_pdf_wasm_bg.wasm');
+    wasmPath = path.resolve(__dirname, 'xlsx_to_pdf_bg.wasm');
   }
   return fs.readFileSync(wasmPath);
 }

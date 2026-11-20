@@ -1861,15 +1861,16 @@ dependencies = [
 ]
 
 [[package]]
-name = "xlsx-to-pdf-wasm"
+name = "xlsx-to-pdf"
 version = "0.1.0"
 dependencies = [
+ "chrono",
+ "hipdf",
  "ironcalc",
  "ironcalc_base",
- "ironcalc_pdf",
  "serde",
  "serde-wasm-bindgen",
- "serde_json",
+ "thiserror 1.0.69",
  "wasm-bindgen",
  "wasm-bindgen-test",
 ]

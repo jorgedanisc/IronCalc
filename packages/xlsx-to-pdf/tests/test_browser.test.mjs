@@ -16,7 +16,7 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const exampleXlsxPath = path.resolve(__dirname, '../../../xlsx/tests/example.xlsx');
 const sampleXlsx = fs.readFileSync(exampleXlsxPath);
-const wasmPath = path.resolve(__dirname, '../dist/xlsx_to_pdf_wasm_bg.wasm');
+const wasmPath = path.resolve(__dirname, '../dist/xlsx_to_pdf_bg.wasm');
 const wasmBytes = fs.readFileSync(wasmPath);
 
 test('Browser bundle: manual init with wasm bytes and convert', async () => {

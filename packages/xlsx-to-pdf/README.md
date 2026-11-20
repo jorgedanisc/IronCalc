@@ -94,7 +94,7 @@ In the browser, import from `'@jorgedanisc/xlsx-to-pdf'` (or `'@jorgedanisc/xlsx
 import { convertXlsxToPdf, init } from '@jorgedanisc/xlsx-to-pdf';
 
 // Optional: customize the WASM location or let it load automatically
-await init(); // or await init('/assets/xlsx_to_pdf_wasm_bg.wasm')
+await init(); // or await init('/assets/xlsx_to_pdf_bg.wasm')
 
 // Convert from an <input type="file"> event or fetch
 async function handleFile(file: File) {

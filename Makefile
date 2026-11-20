@@ -1,6 +1,7 @@
 .PHONY: lint
 lint:
 	cargo fmt -- --check
+	./packages/xlsx-to-pdf/sync-pdf.sh --check
 	cargo clippy --all-targets --all-features -- -W clippy::unwrap_used -W clippy::expect_used -W clippy::panic -D warnings
 	cd webapp/IronCalc/ && npm install && npm run check
 	cd webapp/app.ironcalc.com/frontend/ && npm install && npm run check
@@ -10,6 +11,11 @@ lint:
 .PHONY: format
 format:
 	cargo fmt
+
+# Regenerate the PDF engine vendored in the xlsx-to-pdf crate from pdf/src.
+.PHONY: sync-pdf
+sync-pdf:
+	./packages/xlsx-to-pdf/sync-pdf.sh
 
 .PHONY: test-language-bin
 test-language-bin:

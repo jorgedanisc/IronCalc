@@ -44,3 +44,15 @@ jobs:
           fi
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+
+      - name: Publish xlsx-to-pdf
+        run: |
+          LOCAL="$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[] | select(.name == "xlsx-to-pdf").version')"
+          REMOTE="$(curl -s -A ironcalc-ci https://crates.io/api/v1/crates/xlsx-to-pdf | jq -r '.crate.max_version')"
+          if [ "$LOCAL" = "$REMOTE" ]; then
+            echo "xlsx-to-pdf $LOCAL is already on crates.io, skipping"
+          else
+            cargo publish --token "$CARGO_REGISTRY_TOKEN" --manifest-path packages/xlsx-to-pdf/wasm/Cargo.toml
+          fi
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}

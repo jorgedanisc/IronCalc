@@ -2,7 +2,7 @@ import {
   convertXlsxToPdf as wasmConvertXlsxToPdf,
   getWorkbookInfo as wasmGetWorkbookInfo,
   XlsxDocument as WasmXlsxDocument,
-} from '../pkg-wasm/xlsx_to_pdf_wasm.js';
+} from '../pkg-wasm/xlsx_to_pdf.js';
 
 import {
   init,

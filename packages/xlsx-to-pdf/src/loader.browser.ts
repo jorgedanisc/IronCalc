@@ -1,4 +1,4 @@
-import initWasm, { initSync } from '../pkg-wasm/xlsx_to_pdf_wasm.js';
+import initWasm, { initSync } from '../pkg-wasm/xlsx_to_pdf.js';
 import type { WasmInitInput } from './types.js';
 
 let initialized = false;
@@ -15,7 +15,7 @@ export function isInitialized(): boolean {
  * Initialize the WebAssembly engine in the browser or WebWorker.
  *
  * @param source - Optional URL, Request, Response, ArrayBuffer, or WebAssembly.Module.
- *                 If omitted, defaults to loading `xlsx_to_pdf_wasm_bg.wasm` relative to this module.
+ *                 If omitted, defaults to loading `xlsx_to_pdf_bg.wasm` relative to this module.
  */
 export async function init(source?: WasmInitInput): Promise<void> {
   if (initialized) return;
@@ -32,7 +32,7 @@ export async function init(source?: WasmInitInput): Promise<void> {
       await initWasm(source);
     } else {
       // Default URL resolution for bundlers and modern browsers
-      await initWasm(new URL('./xlsx_to_pdf_wasm_bg.wasm', import.meta.url));
+      await initWasm(new URL('./xlsx_to_pdf_bg.wasm', import.meta.url));
     }
     initialized = true;
   })();
